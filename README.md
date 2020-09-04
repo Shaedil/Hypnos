@@ -16,6 +16,8 @@ The idea came from our personal experiences of being night owls. As night owls, 
 
 Long story short, we wanted to find **a way to read the video transcript in less time than required**. Now, we could just speed up the video lecture to 2X speed. But, the audio would be incomprehensible. Also, **many people do not learn by watching lectures, most learn by reading**. So, we decided to create Hypnos.
 
+Hypnos also goes beyond the classroom. Stuck in a boring meeting? are your the minute taker? just record the meeting and upload you audio file into our app and get a full text document! Now you can play games during your meeting :p
+
 ## What it does
 
 Hypnos was designed to take your class lecture video that may be an hour long and segments it into 10 seconds (*one of our challenges. Explained later*) in which the transcripts are generated and stitched back into one full transcript. Hypnos then takes that full transcript and runs it through the textrank algorithm, which ranks sentences based on their importance, meaning and their word frequency. **From this, a reduced transcript is generated that can be as much as 50% of the original, which is INSANE**
