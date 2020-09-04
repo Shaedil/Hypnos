@@ -1,6 +1,7 @@
 from summa.summarizer import summarize
-from google.cloud.speech_v1 import enums
-import io
+import speech_recognition as sr
+import wave
+import contextlib
 
 def sumThis(text):
 
@@ -16,46 +17,44 @@ def sumThis(text):
 
 
 
-def sample_recognize(local_file_path):
-    """
-    Transcribe a short audio file using synchronous speech recognition
+def sample_recognize(fname):
+    with contextlib.closing(wave.open(fname,'r')) as f:
+        frames = f.getnframes()
+        rate = f.getframerate()
+        duration = frames / float(rate)
+    seg = duration//10+1
 
-    Args:
-      local_file_path Path to local audio file, e.g. /path/audio.wav
-    """
 
-    client = speech_v1.SpeechClient()
+    r = sr.Recognizer()
+    aFile = sr.AudioFile(fname)
 
-    # local_file_path = 'resources/brooklyn_bridge.raw'
+    with aFile as source:
+        #audio = r.record(source)
+        audio = []
+        work = True
+        n = 0
+        while work:
+            #print(n)
+            n += 1
+            try:
+                audio.append(r.record(source, duration=10))
+            except:
+                work = False
+            if n >= seg:
+                break
+    text = ""
+    for a in audio:
+        try:
+            text1 = r.recognize_google(a)
+            #print(text1)
+            text = text+" "+text1
+        except:
+            pass
 
-    # The language of the supplied audio
-    language_code = "en-US"
-
-    # Sample rate in Hertz of the audio data sent
-    sample_rate_hertz = 16000
-
-    # Encoding of audio data sent. This sample sets this explicitly.
-    # This field is optional for FLAC and WAV audio formats.
-    encoding = enums.RecognitionConfig.AudioEncoding.LINEAR16
-    config = {
-        "language_code": language_code,
-        "sample_rate_hertz": sample_rate_hertz,
-        "encoding": encoding,
-    }
-    with io.open(local_file_path, "rb") as f:
-        content = f.read()
-    audio = {"content": content}
-
-    response = client.recognize(config, audio)
-    return str(response.results[0].alternatives[0].transcript)
-    """
-    for result in response.results:
-        # First alternative is the most probable result
-        alternative = result.alternatives[0]
-        print(u"Transcript: {}".format(alternative.transcript))"""
+    return text
+    
 def backend(file_path):
     script = sample_recognize(file_path)
     summaryScript = sumThis(script)
     return script, summaryScript
-
 
