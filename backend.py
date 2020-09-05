@@ -4,7 +4,9 @@ import speech_recognition as sr
 import wave
 import contextlib
 
-blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but"]
+blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
+             "and", "for", "in", "they", "a"]
+
 
 def stripUseless(text):
     global blacklist
@@ -70,9 +72,10 @@ def sample_recognize(fname):
 
 def backend(file_path):
     script = sample_recognize(file_path)
-    summaryScript = sumThis(script)
+    reducedScript = stripUseless(script)
+    summaryScript = sumThis(reducedScript)
     return script, summaryScript
 
 
 # print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
-print(backend("/home/shaedil/Downloads/recordings/recording1.mp3"))
+print(backend("./testvideolecture.mp4"))
