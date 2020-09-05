@@ -57,8 +57,9 @@ class Ui_Hypnos(QtWidgets.QMainWindow,object):
 
     def open(self):
         fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4)")
-        print(fname[0])
-
+        print(fname[0]) #fname[0] is the absolute file path
+        #connection to the backend happens here
+    
 
 if __name__ == "__main__":
     import  sys
