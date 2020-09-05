@@ -7,7 +7,7 @@ import contextlib
 def sumThis(text):
     result = ""
     n = 0.01
-    while result == "" and n < 1:
+    while result == "":
         result = summarize(text, ratio=n)
         n += 0.01
         if n > 1:
