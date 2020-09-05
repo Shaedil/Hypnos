@@ -8,6 +8,18 @@ blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
              "and", "for", "in", "they", "a"]
 
 
+def genQ(text, pText):
+    textL = text.split(" ")
+    textS = list(set(textL))
+    keywords = []
+    for i in range(len(textL)//20+1):
+        word = min(set(textS), key=textL.count)
+        keywords.append(word)
+        textS.remove(word)
+    for word in keywords:
+        pText.replace(word, "_"*len(word))
+    return pText, keywords
+
 def stripUseless(text):
     global blacklist
     for word in blacklist:
