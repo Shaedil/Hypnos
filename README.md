@@ -16,7 +16,7 @@ The idea came from our personal experiences of being night owls. As night owls, 
 
 Long story short, we wanted to find **a way to read the video transcript in less time than required**. Now, we could just speed up the video lecture to 2X speed. But, the audio would be incomprehensible. Also, **many people do not learn by watching lectures, most learn by reading**. So, we decided to create Hypnos.
 
-Hypnos also goes beyond the classroom. Stuck in a boring meeting? are your the minute taker? just record the meeting and upload you audio file into our app and get a full text document! Now you can play games during your meeting :p
+Hypnos also goes beyond the classroom. Stuck in a boring meeting? Are your the minute taker? Just record the meeting and upload you audio file into our app and get a full text document! Now you can play games during your meeting :p
 
 ## What it does
 
