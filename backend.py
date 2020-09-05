@@ -67,14 +67,17 @@ def sample_recognize(fname):
             text = text+" "+text1
         except:
             pass
-    return text
+    punctuated_text = os.popen('curl -d "text={}" http://bark.phon.ioc.ee/punctuator'.format(text))
+    punctuatedText = punctuated_text.read()
+    return punctuatedText
 
 
 def backend(file_path):
     script = sample_recognize(file_path)
-    reducedScript = stripUseless(script)
-    summaryScript = sumThis(reducedScript)
-    return script, summaryScript
+    # reducedScript = stripUseless(script)
+    # summaryScript = sumThis(script)
+    # return script, summaryScript
+    return script
 
 
 # print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
