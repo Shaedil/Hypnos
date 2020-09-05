@@ -60,7 +60,7 @@ class Ui_Hypnos(QtWidgets.QMainWindow,object):
 
 
 if __name__ == "__main__":
-    import sys
+    import  sys
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Windows')
     Hypnos = QtWidgets.QMainWindow()
