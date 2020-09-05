@@ -40,7 +40,7 @@ class Ui_Hypnos(QtWidgets.QMainWindow):
         plusButton.setGeometry(50, 150, 100, 100)
         plusButton.setObjectName("plusButton")
     def open(self):
-        fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4)")
+        fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4*.mp3*.wap)")
         print(fname[0])
         #call to the backend happens here
 app=QtWidgets.QApplication(sys.argv)
