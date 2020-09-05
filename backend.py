@@ -18,7 +18,7 @@ def genQ(text, pText):
         keywords.append(word)
         textS.remove(word)
     for word in keywords:
-        pText.replace(word, "_"*len(word))
+        pText = pText.replace(word, "_"*len(word))
     return pText, keywords
 
 def stripUseless(text):
