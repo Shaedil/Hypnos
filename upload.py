@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+WHITE=QtGui.QColor(255,255,255)
 
 
 class Ui_Hypnos(QtWidgets.QMainWindow,object):
@@ -62,7 +63,26 @@ class Ui_Hypnos(QtWidgets.QMainWindow,object):
 if __name__ == "__main__":
     import  sys
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle('Windows')
+    app.setStyle('Fusion')
+    dark_palette = QtGui.QPalette()
+
+    dark_palette.setColor(QtGui.QPalette.Window, QtGui.QColor(53, 53, 53))
+    dark_palette.setColor(QtGui.QPalette.WindowText, WHITE)
+    dark_palette.setColor(QtGui.QPalette.Base, QtGui.QColor(25, 25, 25))
+    dark_palette.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(53, 53, 53))
+    dark_palette.setColor(QtGui.QPalette.ToolTipBase,WHITE)
+    dark_palette.setColor(QtGui.QPalette.ToolTipText,WHITE)
+    dark_palette.setColor(QtGui.QPalette.Text, WHITE)
+    dark_palette.setColor(QtGui.QPalette.Button, QtCore.Qt.blue)
+    dark_palette.setColor(QtGui.QPalette.ButtonText,WHITE)
+    dark_palette.setColor(QtGui.QPalette.BrightText,QtGui.QColor(255,0,0))
+    dark_palette.setColor(QtGui.QPalette.Link,QtGui.QColor(42, 130, 218))
+    dark_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(42, 130, 218))
+    dark_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.QColor(0,0,0))
+
+    app.setPalette(dark_palette)
+
+    app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
     Hypnos = QtWidgets.QMainWindow()
     ui = Ui_Hypnos()
     ui.setupUi(Hypnos)
