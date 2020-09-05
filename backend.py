@@ -5,7 +5,6 @@ import speech_recognition as sr
 import wave
 import contextlib
 import re
-re.split('; |, ',str)
 
 blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
              "and", "for", "in", "they", "a"]
