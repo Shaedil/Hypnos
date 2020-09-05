@@ -10,6 +10,8 @@ blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
 
 
 def genQ(text, pText):
+    # text -> unpunctuated text
+    # pText -> punctuated text
     textL = text.split(" ")
     textS = list(set(textL))
     keywords = []
@@ -19,6 +21,8 @@ def genQ(text, pText):
         textS.remove(word)
     for word in keywords:
         pText = pText.replace(word, "_"*len(word))
+    # pText -> punctuated text with blanks
+    # keywords -> word bank
     return pText, keywords
 
 def stripUseless(text):
@@ -85,8 +89,6 @@ def sample_recognize(fname):
             text = text+" "+text1
         except:
             pass
-    # here is where the punctuated functon is called
-    punctuated_text = punctuate(text)
     return text
 
 
@@ -98,9 +100,11 @@ def punctuate(text):
 
 def backend(file_path):
     script = sample_recognize(file_path)
-    summaryScript = sumThis(script)
-    return script, summaryScript
+    pscript = punctuate(script)
+    questionsList = genQ(script, pscript)
+    # summaryScript = sumThis(pscript)
+    return questionsList
 
 
 # print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
-print(backend("./test.wav"))
+print(backend("./testvideolecture.mp4"))
