@@ -29,10 +29,8 @@ def genQ(text, pText):
     for t in pTextL:
         if t.find("__") != -1:
             questions.append(t)
-        
-    
-    
     return questions, keywords
+
 
 def stripUseless(text):
     global blacklist
@@ -48,7 +46,7 @@ def sumThis(text):
     # n = 0.01
     while result == "":
         result = summarize(text)
-        print(keywords.keywords(text))
+        # print(keywords.keywords(text))
         # result = summarize(text, ratio=n)
         # n += 0.01
         # if n > 1:
@@ -111,8 +109,15 @@ def backend(file_path):
     script = sample_recognize(file_path)
     pscript = punctuate(script)
     questionsList = genQ(script, pscript)
-    # summaryScript = sumThis(pscript)
-    return questionsList
+    with open('questions.txt', 'w') as f:
+        for item in questionsList:
+            if not item == '':
+                for i in item:
+                    f.write("%s\n" % i)
+            else:
+                f.write("%s\n" % item)
+    summaryScript = sumThis(pscript)
+    return summaryScript
 
 
 # print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
