@@ -7,9 +7,13 @@ import contextlib
 def sumThis(text):
     result = ""
     n = 0.01
-    while result == "":
+    while result == "" and n < 1:
         result = summarize(text, ratio=n)
         n += 0.01
+        if n > 1:
+            result = text
+            break
+
     return result
 
 
@@ -44,7 +48,6 @@ def sample_recognize(fname):
             text = text+" "+text1
         except:
             pass
-
     return text
 
 
@@ -52,6 +55,3 @@ def backend(file_path):
     script = sample_recognize(file_path)
     summaryScript = sumThis(script)
     return script, summaryScript
-
-
-backend('/home/shaedil/Downloads/recordings/Recording 1.wav')
