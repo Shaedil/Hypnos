@@ -4,7 +4,7 @@ from summa import keywords
 import speech_recognition as sr
 import wave
 import contextlib
-import re
+
 
 blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
              "and", "for", "in", "they", "a"]
@@ -25,14 +25,14 @@ def genQ(text, pText):
     # pText -> punctuated text with blanks
     # keywords -> word bank
     questions = []
-    pTextL = re.split('. |? |! ',pText)
+    pTextL = pText.replace("?", ".").replace("!", ".").split(". ")
     for t in pTextL:
         if t.find("__") != -1:
             questions.append(t)
         
     
     
-    return questions
+    return questions, keywords
 
 def stripUseless(text):
     global blacklist
