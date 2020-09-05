@@ -4,6 +4,16 @@ import speech_recognition as sr
 import wave
 import contextlib
 
+blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but"]
+
+def stripUseless(text):
+    global blacklist
+    for word in blacklist:
+
+        text = text.replace(" "+word+" ", " ")
+
+    return text
+
 
 def sumThis(text):
     result = ""
@@ -15,7 +25,7 @@ def sumThis(text):
             result = text
             break
 
-    return result
+    return stripUseless(result)
 
 
 def sample_recognize(fname):
