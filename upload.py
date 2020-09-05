@@ -14,48 +14,76 @@ WHITE=QtGui.QColor(255,255,255)
 
 class Ui_Hypnos(QtWidgets.QMainWindow,object):
     def setupUi(self, Hypnos):
+        
+        #setting the name for the MainWindow
         Hypnos.setObjectName("Hypnos")
+        
+        #sizing the mainWindow
         Hypnos.resize(800, 600)
+        
+        #setting the window title
         Hypnos.setWindowTitle("Hypnos")
+        
+        #setting the main window as the central widget
         self.centralwidget = QtWidgets.QWidget(Hypnos)
         self.centralwidget.setObjectName("centralwidget")
-
+        
+        #push button for uploading file path
         self.uploadButton = QtWidgets.QPushButton(self.centralwidget)
+        
+        #geometry for upload button
         self.uploadButton.setGeometry(QtCore.QRect(200, 210, 371, 111))
+        
+        #customising font for the button text
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
+        
+        #setting button font 
         self.uploadButton.setFont(font)
         self.uploadButton.setAutoFillBackground(True)
+        
+        #setting the object name for the push button 
         self.uploadButton.setObjectName("uploadButton")
+        
+        #setting CSS for the push button
         self.uploadButton.setStyleSheet("background-color=blurgb(85, 170, 255)")
         self.uploadButton.setStyleSheet("border-style=outset")
         self.uploadButton.setStyleSheet("border-width=2px")
         self.uploadButton.setStyleSheet("border-radius=10px")
+        
+        #Triggeriing the upload button
         self.uploadButton.clicked.connect(self.open)
-
+        
+        #updating the central widget
         Hypnos.setCentralWidget(self.centralwidget)
 
 
-        self.menubar = QtWidgets.QMenuBar(Hypnos)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
-        self.menubar.setObjectName("menubar")
-        Hypnos.setMenuBar(self.menubar)
+        #setting the status bar
         self.statusbar = QtWidgets.QStatusBar(Hypnos)
+        
+        #setting the object name for the status bar
         self.statusbar.setObjectName("statusbar")
         Hypnos.setStatusBar(self.statusbar)
-
+        
+        #calling function retranslateUi
         self.retranslateUi(Hypnos)
         QtCore.QMetaObject.connectSlotsByName(Hypnos)
 
     def retranslateUi(self, Hypnos):
         _translate = QtCore.QCoreApplication.translate
+        
+        #setting windows title
         Hypnos.setWindowTitle(_translate("Hypnos", "MainWindow"))
+        
+        #setting the pointer tip for upload button 
         self.uploadButton.setWhatsThis(_translate("Hypnos", "Upload files "))
+        #setting button text for the upload file button 
         self.uploadButton.setText(_translate("Hypnos", "Upload New Files"))
 
     def open(self):
+        #opening the file dialog for selecting the file 
         fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4)")
         print(fname[0]) #fname[0] is the absolute file path
         #connection to the backend happens here
@@ -64,9 +92,14 @@ class Ui_Hypnos(QtWidgets.QMainWindow,object):
 if __name__ == "__main__":
     import  sys
     app = QtWidgets.QApplication(sys.argv)
+    
+    #set the main window style
     app.setStyle('Fusion')
+    
+    #declaration of dark_palette
     dark_palette = QtGui.QPalette()
-
+    
+    #defination of dark palette
     dark_palette.setColor(QtGui.QPalette.Window, QtGui.QColor(53, 53, 53))
     dark_palette.setColor(QtGui.QPalette.WindowText, WHITE)
     dark_palette.setColor(QtGui.QPalette.Base, QtGui.QColor(25, 25, 25))
@@ -80,12 +113,22 @@ if __name__ == "__main__":
     dark_palette.setColor(QtGui.QPalette.Link,QtGui.QColor(42, 130, 218))
     dark_palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(42, 130, 218))
     dark_palette.setColor(QtGui.QPalette.HighlightedText, QtGui.QColor(0,0,0))
-
+    
+    #setting dark_palette as the app theme
     app.setPalette(dark_palette)
-
+    
+    #setting the tooltip CSS
     app.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }")
+    
+    #creating MainWindow object 
     Hypnos = QtWidgets.QMainWindow()
+    
+    #declaring object of Ui_hypnos class
     ui = Ui_Hypnos()
+    
+    #passing mainwindow argument to Ui_Hypnos class
     ui.setupUi(Hypnos)
+    
+    #publishing the window
     Hypnos.show()
     sys.exit(app.exec_())
