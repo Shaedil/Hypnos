@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore,QtGui,QtWidgets
 import sys
-
 class Ui_Hypnos(QtWidgets.QMainWindow):
     def __init__(self):
 
@@ -19,11 +18,9 @@ class Ui_Hypnos(QtWidgets.QMainWindow):
         self.resize(800,600)
 
         self.upload_button()
+        
 
         self.show()
-
-
-
     def upload_button(self):
 
         self.uploadButton = QtWidgets.QPushButton("Upload files here",self)
@@ -34,16 +31,38 @@ class Ui_Hypnos(QtWidgets.QMainWindow):
         font.setWeight(75)
         self.uploadButton.setFont(font)
         self.uploadButton.setObjectName("uploadButton")
-        self.uploadButton.setStyleSheet("background-color=blurgb(85, 170, 255)")
-        self.uploadButton.setStyleSheet("border-style=outset")
-        self.uploadButton.setStyleSheet("border-width=2px")
-        self.uploadButton.setStyleSheet("border-radius=10px")
+        self.uploadButton.setGeometry(200, 150, 100, 100)
+        self.uploadButton.resize(400,100)
+        
         self.uploadButton.clicked.connect(self.open)
+
+        plusButton = QtWidgets.QPushButton(self)
+        plusButton.setGeometry(50, 150, 100, 100)
+        plusButton.setObjectName("plusButton")
     def open(self):
-        fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4)")
+        fname=QtWidgets.QFileDialog.getOpenFileName(self,'Open File', 'c:\\',"Video Files(*.mp4*.mp3*.wap)")
         print(fname[0])
         #call to the backend happens here
 app=QtWidgets.QApplication(sys.argv)
 app.setStyle('Fusion')
 window=Ui_Hypnos()
+window.stylesheet = """
+        QPushButton#uploadButton{
+            background-color: #173042;
+            color: #fff;
+            border-radius: 10px;
+            font-size: 25px;
+            font-family: 'Roboto';
+            font-weight: 3000;
+        }
+        QPushButton#plusButton{
+            background-color: #31BE8B;
+            background-image: url(images/icon (1).png);
+            border-radius: 50px;
+            background-repeat: repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }"""
+window.setGeometry(1000, 1000, 1000, 1000)
+app.setStyleSheet(window.stylesheet)
 sys.exit(app.exec_())

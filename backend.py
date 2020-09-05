@@ -1,5 +1,6 @@
 import os
 from summa.summarizer import summarize
+from summa import keywords
 import speech_recognition as sr
 import wave
 import contextlib
@@ -7,6 +8,18 @@ import contextlib
 blacklist = ["very", "so", "pretty", "always", "the", "are", "is", "but",
              "and", "for", "in", "they", "a"]
 
+
+def genQ(text, pText):
+    textL = text.split(" ")
+    textS = list(set(textL))
+    keywords = []
+    for i in range(len(textL)//20+1):
+        word = min(set(textS), key=textL.count)
+        keywords.append(word)
+        textS.remove(word)
+    for word in keywords:
+        pText = pText.replace(word, "_"*len(word))
+    return pText, keywords
 
 def stripUseless(text):
     global blacklist
@@ -19,23 +32,28 @@ def stripUseless(text):
 
 def sumThis(text):
     result = ""
-    n = 0.01
+    # n = 0.01
     while result == "":
-        result = summarize(text, ratio=n)
-        n += 0.01
-        if n > 1:
-            result = text
-            break
+        result = summarize(text)
+        print(keywords.keywords(text))
+        # result = summarize(text, ratio=n)
+        # n += 0.01
+        # if n > 1:
+        #     result = text
+        #     break
 
-    return stripUseless(result)
+    return result
 
 
 def sample_recognize(fname):
     head, tail = os.path.split(fname)
-    wavname = head + '/' + tail[:-4] + '.wav'
-    os.popen('ffmpeg -i {} {}'.format(fname, wavname))
-    if 'ffmpeg: command not found' in wavname:
-        return("ffmpeg is not installed")
+    if not(tail[-4:] == '.wav'):
+        wavname = head + '/' + tail[:-4] + '.wav'
+        os.popen('ffmpeg -i {} {}'.format(fname, wavname))
+        if 'ffmpeg: command not found' in wavname:
+            return("ffmpeg is not installed")
+    else:
+        wavname = fname
 
     with contextlib.closing(wave.open(wavname, 'r')) as f:
         frames = f.getnframes()
@@ -67,6 +85,12 @@ def sample_recognize(fname):
             text = text+" "+text1
         except:
             pass
+    # here is where the punctuated functon is called
+    punctuated_text = punctuate(text)
+    return text
+
+
+def punctuate(text):
     punctuated_text = os.popen('curl -d "text={}" http://bark.phon.ioc.ee/punctuator'.format(text))
     punctuatedText = punctuated_text.read()
     return punctuatedText
@@ -74,11 +98,9 @@ def sample_recognize(fname):
 
 def backend(file_path):
     script = sample_recognize(file_path)
-    # reducedScript = stripUseless(script)
-    # summaryScript = sumThis(script)
-    # return script, summaryScript
-    return script
+    summaryScript = sumThis(script)
+    return script, summaryScript
 
 
 # print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
-print(backend("./testvideolecture.mp4"))
+print(backend("./test.wav"))
