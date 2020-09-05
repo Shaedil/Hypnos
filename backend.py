@@ -19,9 +19,9 @@ def sumThis(text):
 
 
 def sample_recognize(fname):
-    stream = os.popen('ffmpeg -i {} {}'.format(fname, fname+'.wav'))
     head, tail = os.path.split(fname)
-    wavname = head + fname+'.wav'
+    wavname = head + '/' + tail[:-4] + '.wav'
+    os.popen('ffmpeg -i {} {}'.format(fname, wavname))
     if 'ffmpeg: command not found' in wavname:
         return("ffmpeg is not installed")
 
