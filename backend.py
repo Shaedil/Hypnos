@@ -1,6 +1,5 @@
 import os
 from summa.summarizer import summarize
-from summa import keywords
 import speech_recognition as sr
 import wave
 import contextlib
@@ -17,7 +16,7 @@ def genQ(text, pText):
     textS = list(set(textL))
     keywords = []
     for i in range(len(textL)//20+1):
-        word = min(set(textS), key=textL.count)
+        word = max(set(textS), key=textL.count)
         keywords.append(word)
         textS.remove(word)
     for word in keywords:
@@ -105,10 +104,7 @@ def punctuate(text):
     return punctuatedText
 
 
-def backend(file_path):
-    script = sample_recognize(file_path)
-    pscript = punctuate(script)
-    questionsList = genQ(script, pscript)
+def save_questions(questionsList):
     with open('questions.txt', 'w') as f:
         for item in questionsList:
             if not item == '':
@@ -116,9 +112,27 @@ def backend(file_path):
                     f.write("%s\n" % i)
             else:
                 f.write("%s\n" % item)
-    summaryScript = sumThis(pscript)
+
+
+def save_summary(pscript):
+    with open('summary.txt', 'w') as f:
+        summaryScript = sumThis(pscript)
+        f.write(summaryScript)
+
+
+def save_transcript(pscript):
+    with open('transcript.txt', 'w') as f:
+        f.write(pscript)
+
+
+def backend(file_path):
+    script = sample_recognize(file_path)
+    pscript = punctuate(script)
+    questionsList = genQ(script, pscript)
+    save_questions(questionsList)
+    save_summary(pscript)
+    save_transcript(pscript)
     return summaryScript
 
 
-# print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
 print(backend("./testvideolecture.mp4"))
