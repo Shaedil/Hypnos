@@ -1,3 +1,4 @@
+import os
 from summa.summarizer import summarize
 import speech_recognition as sr
 import wave
@@ -18,13 +19,19 @@ def sumThis(text):
 
 
 def sample_recognize(fname):
-    with contextlib.closing(wave.open(fname, 'r')) as f:
+    stream = os.popen('ffmpeg -i {} {}'.format(fname, fname+'.wav'))
+    head, tail = os.path.split(fname)
+    wavname = head + fname+'.wav'
+    if 'ffmpeg: command not found' in wavname:
+        return("ffmpeg is not installed")
+
+    with contextlib.closing(wave.open(wavname, 'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
         duration = frames / float(rate)
     seg = duration//10+1
     r = sr.Recognizer()
-    aFile = sr.AudioFile(fname)
+    aFile = sr.AudioFile(wavname)
 
     with aFile as source:
         # audio = r.record(source)
@@ -55,3 +62,7 @@ def backend(file_path):
     script = sample_recognize(file_path)
     summaryScript = sumThis(script)
     return script, summaryScript
+
+
+# print(backend("/home/shaedil/Downloads/recordings/Recording 1.wav"))
+print(backend("/home/shaedil/Downloads/recordings/recording1.mp3"))
