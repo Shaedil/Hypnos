@@ -20,7 +20,7 @@ Hypnos also goes beyond the classroom. Stuck in a boring meeting? Are your the m
 
 ## What it does
 
-Hypnos was designed to take your class lecture video that may be an hour long and segments it into 10 seconds (*one of our challenges. Explained later*) in which the transcripts are generated and stitched back into one full transcript. Hypnos then takes that full transcript and runs it through the textrank algorithm, which ranks sentences based on their importance, meaning and their word frequency. **From this, a reduced transcript is generated that can be as much as 50% of the original, which is INSANE**
+Hypnos was designed to take your class lecture video that may be an hour long and segments it into 10 seconds (*one of our challenges. Explained later*) in which the transcripts are generated and stitched back into one full transcript. Hypnos then takes that full transcript and runs it through the textrank algorithm, which ranks sentences based on their importance, meaning and their word frequency. **From this, a reduced transcript is generated that can be as much as 50% of the original, which is INSANE**. But that's not all! We had a brainstorming session the other day and we wanted to incorporate something spectacular into Hypnos. **We thought about how hard it must be for teachers to create questions based on content they have said, especially when they don't remember what they said**. This will be helpful for teachers to prepare their students on their quizzes which test on things that have been said, but not written down. **It's always a nuisance when that happens**. Now with Hypnos, teachers will be able to generate questions on recorded videos with a click of a button. Questions generated will generally follow the format: "------ is a property of matter dealing with how much stuff it contains" Answer: *Volume*
 
 
 ## How we Built it
@@ -37,7 +37,7 @@ This was our **first time handling machine learning models** like these and the 
 
 ## What's next for Hypnos
 
-We had a brainstorming session the other day and we wanted to incorporate something spectacular into Hypnos. **We thought about how hard it must be for teachers to create questions based on content they have said, especially when they don't remember what they said**. This will be helpful for teachers to prepare their students on their quizzes which test on things that have been said, but not written down. **It's always a nuisance when that happens**. Now with Hypnos, teachers will be able to generate questions on recorded videos with a click of a button. Questions generated will generally follow the format: "------ is a property of matter dealing with how much stuff it contains" Answer: *Volume*
+We hope to advance the algorithms and port this into a webapp so that this can work anywhere and anytime. We also hope to create more features such as a timestamp generator that locates where the important things are being said in the video.
 
 ## Try it out
 

@@ -114,9 +114,8 @@ def save_questions(questionsList):
                 f.write("%s\n" % item)
 
 
-def save_summary(pscript):
+def save_summary(summaryScript):
     with open('summary.txt', 'w') as f:
-        summaryScript = sumThis(pscript)
         f.write(summaryScript)
 
 
@@ -129,10 +128,11 @@ def backend(file_path):
     script = sample_recognize(file_path)
     pscript = punctuate(script)
     questionsList = genQ(script, pscript)
-    save_questions(questionsList)
-    save_summary(pscript)
-    save_transcript(pscript)
-    return summaryScript
+    summaryScript = sumThis(pscript)
+    # save_questions(questionsList)
+    # save_summary(summaryScript)
+    # save_transcript(pscript)
+    return script, pscript, questionsList, summaryScript
 
 
-print(backend("./testvideolecture.mp4"))
+# print(backend("./test.wav"))
