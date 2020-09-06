@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui,QtWidgets
 import sys
+import backendend as be
 
 
 class Window(QMainWindow):
@@ -236,6 +237,7 @@ class Window(QMainWindow):
         fname = QFileDialog.getOpenFileName(self, 'Open File', 'c:\\', "Video Files(*.mp4)")
         print(fname[0])
         if fname[0] != '':
+            self.script, self.pscript = be.backend(fname[0])
             return True
     #fname[0] is the absolute file path
         #connection to the backend happens here
@@ -244,9 +246,11 @@ class Window(QMainWindow):
         print("your text has saved to drive")
 
     def summarizeText(self):
+        return be.sumThis(self.pscript)
         print("your text has been summarize")
 
     def questionGenerator(self):
+        return be.genQ(self.script, self.pscript)
         print("you have generated practice questions")
 
     # def audioUploadedUI(self):
