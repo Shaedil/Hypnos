@@ -9,7 +9,7 @@ class Window(QMainWindow):
         super().__init__()
 
         # set the title of main window
-        self.setWindowTitle('Sidebar layout - www.luochang.ink')
+        self.setWindowTitle('Hypnos')
 
         # set the size of window
         self.Width = 800
@@ -23,13 +23,11 @@ class Window(QMainWindow):
         self.btn_4 = QPushButton('save&summariize ', self)
         self.btn_5 = QPushButton('save Qs', self)
 
-
         self.btn_1.clicked.connect(self.button1)
         self.btn_2.clicked.connect(self.button2)
         self.btn_3.clicked.connect(self.button3)
         self.btn_4.clicked.connect(self.button4)
         self.btn_5.clicked.connect(self.button5)
-
 
         # add tabs
         self.tab1 = self.ui1()
@@ -38,10 +36,8 @@ class Window(QMainWindow):
         self.tab4 = self.ui4()
         self.tab5 = self.ui5()
 
-
         self.initUI()
         self.show()
-
 
     def initUI(self):
         left_layout = QVBoxLayout()
@@ -51,7 +47,7 @@ class Window(QMainWindow):
         left_layout.addWidget(self.btn_4)
         left_layout.addWidget(self.btn_5)
 
-        left_layout.addStretch(5)
+        left_layout.addStretch(20)
         left_layout.setSpacing(20)
         left_widget = QWidget()
         left_widget.setLayout(left_layout)
@@ -73,10 +69,12 @@ class Window(QMainWindow):
         main_layout.addWidget(left_widget)
         main_layout.addWidget(self.right_widget)
         main_layout.setStretch(0, 150)
-        main_layout.setStretch(1, 400)
+        main_layout.setStretch(1, 450)
         main_widget = QWidget()
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
+        # main_widget.setStyleSheet("background-color:#236477;");
+
 
     # -----------------
     # buttons
@@ -102,9 +100,10 @@ class Window(QMainWindow):
     def ui1(self):
         main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel('List of Saved Files'))
-        main_layout.addStretch(5)
+
         main = QWidget()
         main.setLayout(main_layout)
+
 
         return main
 
@@ -116,9 +115,9 @@ class Window(QMainWindow):
 
         uploadButton = QPushButton(self)
         uploadButton.setText("Upload audio file")
-        uploadButton.setGeometry(200, 150, 100, 100)
         uploadButton.clicked.connect(self.openUserFiles)
         uploadButton.setObjectName("uploadButton")
+
 
         uploadIconButton = QPushButton(self)
         # uploadButton.clicked.connect(self.openUserFiles)
@@ -138,12 +137,10 @@ class Window(QMainWindow):
 
         questionGenButton = QPushButton(self)
         questionGenButton.setText("Generate practice Questions")
-        questionGenButton.setGeometry(200, 150, 100, 100)
         questionGenButton.clicked.connect(self.questionGenerator)
         questionGenButton.setObjectName("questionGenButton")
 
         questionGenIconButton = QPushButton(self)
-        questionGenIconButton.setGeometry(200, 150, 100, 100)
         questionGenIconButton.setObjectName("questionGenIconButton")
         main_layout.addWidget(questionGenButton, alignment=QtCore.Qt.AlignCenter)
         main_layout.addWidget(questionGenIconButton, alignment=QtCore.Qt.AlignCenter)
@@ -159,28 +156,23 @@ class Window(QMainWindow):
         main.setLayout(main_layout)
 
         textEdit = QTextEdit(self)
-        textEdit.setGeometry(QtCore.QRect(90, 10, 591, 361))
         textEdit.setObjectName("textEdit")
 
         saveButton = QPushButton(self)
         saveButton.setText("Save")
-        saveButton.setGeometry(200, 450, 100, 100)
-        saveButton.resize(400, 100)
         saveButton.clicked.connect(self.save)
         saveButton.setObjectName("saveButton")
 
         saveIconButton = QPushButton(self)
-        saveIconButton.setGeometry(50, 450, 100, 100)
+        saveIconButton.setObjectName("saveIconButton")
+
 
         summarizeButton = QPushButton(self)
         summarizeButton.setText("Generate Summary")
-        summarizeButton.setGeometry(200, 300, 100, 100)
-        summarizeButton.resize(400, 100)
         summarizeButton.clicked.connect(self.summarizeText)
         summarizeButton.setObjectName("summarizeButton")
 
         summarizeIconButton = QPushButton(self)
-        summarizeIconButton.setGeometry(50, 300, 100, 100)
         # summarizeButton.clicked.connect(self.summarizeText)
         summarizeIconButton.setObjectName("summarizeIconButton")
 
@@ -201,18 +193,14 @@ class Window(QMainWindow):
         main.setLayout(main_layout)
 
         textEdit = QTextEdit(self)
-        textEdit.setGeometry(QtCore.QRect(90, 10, 591, 361))
         textEdit.setObjectName("textEdit")
 
         saveButton = QPushButton(self)
         saveButton.setText("Save")
-        saveButton.setGeometry(200, 450, 100, 100)
-        saveButton.resize(400, 100)
         saveButton.clicked.connect(self.save)
         saveButton.setObjectName("saveButton")
-
         saveIconButton = QPushButton(self)
-        saveIconButton.setGeometry(50, 450, 100, 100)
+        saveIconButton.setObjectName("saveIconButton")
 
         main_layout.addWidget(textEdit, alignment=QtCore.Qt.AlignCenter)
         main_layout.addWidget(saveButton, alignment=QtCore.Qt.AlignCenter)
@@ -327,13 +315,39 @@ if __name__ == '__main__':
         font-family: 'Roboto';
         font-weight: 3000; 
     }
-    # QVBoxLayout {
-    #     background-color: #236477;
-    # }
+        
+    QHBoxLayout {
+        background-color: #236477;
+
+    }
+    
+    QVBoxLayout {
+        background-color: #236477;
+
+    }
     QPushButton#uploadIconButton {
         background-color: #31BE8B;
+        background-image: url(images/icon (2).png);
+        border-radius: 50px;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+        }
+        
+        
+    QPushButton#saveIconButton {
+        background-color: #31BE8B;
+        background-image: url(images/icon (3).png);
+        border-radius: 50px;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+        }
+        
+    QPushButton#summarizeIconButton, QPushButton#questionGenIconButton{
+        background-color: #31BE8B;
         background-image: url(images/icon (1).png);
-        border-radius: 10000px;
+        border-radius: 50px;
         background-repeat: repeat;
         background-attachment: fixed;
         background-position: center;
