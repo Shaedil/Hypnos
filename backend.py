@@ -127,12 +127,14 @@ def save_transcript(pscript):
 def backend(file_path):
     script = sample_recognize(file_path)
     pscript = punctuate(script)
+    return script, pscript
+"""
     questionsList = genQ(script, pscript)
     summaryScript = sumThis(pscript)
     # save_questions(questionsList)
     # save_summary(summaryScript)
     # save_transcript(pscript)
-    return script, pscript, questionsList, summaryScript
+    return script, pscript, questionsList, summaryScript"""
 
 
 # print(backend("./test.wav"))
