@@ -238,7 +238,7 @@ class Window(QMainWindow):
         print(fname[0])
         if fname[0] != '':
             self.script, self.pscript = be.backend(fname[0])
-            return True
+            return self.script, self.pscript
     #fname[0] is the absolute file path
         #connection to the backend happens here
 
