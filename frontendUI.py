@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui,QtWidgets
 import sys
 import backend as be
 
-
+# credit to https://www.luochang.ink/posts/pyqt5_layout_sidebar/ for the base layout
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,7 +22,6 @@ class Window(QMainWindow):
         self.btn_3 = QPushButton('Generate Qs', self)
         self.btn_4 = QPushButton('save&summariize ', self)
         self.btn_5 = QPushButton('save Qs', self)
-
 
 
         self.btn_1.clicked.connect(self.button1)
@@ -66,7 +65,6 @@ class Window(QMainWindow):
         self.right_widget.addTab(self.tab4, '')
         self.right_widget.addTab(self.tab5, '')
 
-
         self.right_widget.setCurrentIndex(0)
         self.right_widget.setStyleSheet('''QTabBar::tab{width: 0; \
             height: 0; margin: 0; padding: 0; border: none;}''')
@@ -74,8 +72,8 @@ class Window(QMainWindow):
         main_layout = QHBoxLayout()
         main_layout.addWidget(left_widget)
         main_layout.addWidget(self.right_widget)
-        main_layout.setStretch(0, 40)
-        main_layout.setStretch(1, 200)
+        main_layout.setStretch(0, 150)
+        main_layout.setStretch(1, 400)
         main_widget = QWidget()
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
@@ -113,22 +111,20 @@ class Window(QMainWindow):
     def ui2(self):
         main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel('Transcribe audio'))
-        main_layout.addStretch(5)
         main = QWidget()
         main.setLayout(main_layout)
 
         uploadButton = QPushButton(self)
         uploadButton.setText("Upload audio file")
-        uploadButton.setGeometry(400, 150, 100, 600)
+        uploadButton.setGeometry(200, 150, 100, 100)
         uploadButton.clicked.connect(self.openUserFiles)
         uploadButton.setObjectName("uploadButton")
 
         uploadIconButton = QPushButton(self)
-        uploadIconButton.setGeometry(50, 150, 100, 100)
         # uploadButton.clicked.connect(self.openUserFiles)
         uploadIconButton.setObjectName("uploadIconButton")
-        main_layout.addWidget(uploadButton)
-        main_layout.addWidget(uploadIconButton)
+        main_layout.addWidget(uploadButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(uploadIconButton, alignment=QtCore.Qt.AlignCenter)
 
         #check if file path successful
         # self.audioUploadedUI()
@@ -137,32 +133,28 @@ class Window(QMainWindow):
     def ui3(self):
         main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel('Generate Questions'))
-        main_layout.addStretch(5)
         main = QWidget()
         main.setLayout(main_layout)
 
         questionGenButton = QPushButton(self)
         questionGenButton.setText("Generate practice Questions")
-        questionGenButton.setGeometry(200, 600, 100, 100)
-        questionGenButton.resize(400, 100)
+        questionGenButton.setGeometry(200, 150, 100, 100)
         questionGenButton.clicked.connect(self.questionGenerator)
         questionGenButton.setObjectName("questionGenButton")
 
         questionGenIconButton = QPushButton(self)
-        questionGenIconButton.setGeometry(50, 600, 100, 100)
+        questionGenIconButton.setGeometry(200, 150, 100, 100)
         questionGenIconButton.setObjectName("questionGenIconButton")
-        main_layout.addWidget(questionGenButton)
-        main_layout.addWidget(questionGenIconButton)
+        main_layout.addWidget(questionGenButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(questionGenIconButton, alignment=QtCore.Qt.AlignCenter)
 
         # check if file path successful
         # self.textfileUploadedUI()
         return main
 
-
     def ui4(self):
         main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel('Will be hidden from sidebar --> save or summarize'))
-        main_layout.addStretch(5)
         main = QWidget()
         main.setLayout(main_layout)
 
@@ -192,11 +184,11 @@ class Window(QMainWindow):
         # summarizeButton.clicked.connect(self.summarizeText)
         summarizeIconButton.setObjectName("summarizeIconButton")
 
-        main_layout.addWidget(textEdit)
-        main_layout.addWidget(saveButton)
-        main_layout.addWidget(saveIconButton)
-        main_layout.addWidget(summarizeButton)
-        main_layout.addWidget(summarizeIconButton)
+        main_layout.addWidget(textEdit, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(saveButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(saveIconButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(summarizeButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(summarizeIconButton, alignment=QtCore.Qt.AlignCenter)
 
         return main
 
@@ -205,7 +197,6 @@ class Window(QMainWindow):
         #once a valid text file path has bee recorded --> thhis ui should show up
         main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel('Will be hidden from sidebar --> save or summarize'))
-        main_layout.addStretch(5)
         main = QWidget()
         main.setLayout(main_layout)
 
@@ -223,9 +214,9 @@ class Window(QMainWindow):
         saveIconButton = QPushButton(self)
         saveIconButton.setGeometry(50, 450, 100, 100)
 
-        main_layout.addWidget(textEdit)
-        main_layout.addWidget(saveButton)
-        main_layout.addWidget(saveIconButton)
+        main_layout.addWidget(textEdit, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(saveButton, alignment=QtCore.Qt.AlignCenter)
+        main_layout.addWidget(saveIconButton, alignment=QtCore.Qt.AlignCenter)
         return main
 
 
@@ -248,11 +239,11 @@ class Window(QMainWindow):
         print("your text has saved to drive")
 
     def summarizeText(self):
-        
+
         print("your text has been summarize")
 
     def questionGenerator(self):
-        
+
         print("you have generated practice questions")
 
     # def audioUploadedUI(self):
@@ -322,8 +313,6 @@ class Window(QMainWindow):
     #     main_layout.addWidget(saveIconButton)
     #     return main
 
-
-
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
@@ -344,7 +333,7 @@ if __name__ == '__main__':
     QPushButton#uploadIconButton {
         background-color: #31BE8B;
         background-image: url(images/icon (1).png);
-        border-radius: 50px;
+        border-radius: 10000px;
         background-repeat: repeat;
         background-attachment: fixed;
         background-position: center;
