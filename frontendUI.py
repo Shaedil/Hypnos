@@ -220,18 +220,25 @@ class Window(QMainWindow):
             self.summ = be.sumThis(self.pscript)
             self.questions, self.keywords = be.genQ(self.script, self.pscript)
             return True
+        self.textEdit.setText(script)
     #fname[0] is the absolute file path
         #connection to the backend happens here
 
     def save(self):
+        fname=QFileDialog.getSaveFileName(self,'Save File')
+        data=self.textEdit.toPlainText()
+        file=open(fname[0],'w')
+        file.write(data)
+        file.close()
         print("your text has saved to drive")
 
     def summarizeText(self):
+        self.textEdit.setText(self.summ)
 
         print("your text has been summarize")
 
     def questionGenerator(self):
-
+        self.textEdit.setText(self.questions)
         print("you have generated practice questions")
 
     # def audioUploadedUI(self):
