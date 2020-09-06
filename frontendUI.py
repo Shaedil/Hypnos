@@ -213,7 +213,7 @@ class Window(QMainWindow):
 
     def openUserFiles(self) -> True:
         #opening the file dialog for selecting the file
-        fname = QFileDialog.getOpenFileName(self, 'Open File', 'c:\\', "Video Files(*.mp4*.mp3*.wav)")
+        fname = QFileDialog.getOpenFileName(self, 'Open File', 'c:\\', "Video Files(*.wav)")
         print(fname[0])
         if fname[0] != '':
             self.script, self.pscript = be.backend(fname[0])
