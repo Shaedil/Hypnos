@@ -238,6 +238,8 @@ class Window(QMainWindow):
         print(fname[0])
         if fname[0] != '':
             self.script, self.pscript = be.backend(fname[0])
+            self.summ = be.sumThis(self.pscript)
+            self.questions, self.keywords = be.genQ(self.script, self.pscript)
             return True
     #fname[0] is the absolute file path
         #connection to the backend happens here
@@ -246,11 +248,11 @@ class Window(QMainWindow):
         print("your text has saved to drive")
 
     def summarizeText(self):
-        self.summ = be.sumThis(self.pscript)
+        
         print("your text has been summarize")
 
     def questionGenerator(self):
-        self.questions, self.keywords = be.genQ(self.script, self.pscript)
+        
         print("you have generated practice questions")
 
     # def audioUploadedUI(self):
